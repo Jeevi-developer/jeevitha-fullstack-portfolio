@@ -42,20 +42,69 @@ img{max-width:100%;display:block}
 .topbar.open .hamburger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
 /* ---------- Hero ---------- */
-.hero{position:relative;min-height:88vh;display:flex;align-items:center;overflow:hidden;background:linear-gradient(rgba(19,32,43,.55),rgba(19,32,43,.78)),var(--hero-img) center/cover no-repeat;background-attachment:fixed}
-.hero-overlay{position:absolute;inset:0;background:radial-gradient(circle at 70% 40%,transparent,rgba(19,32,43,.4))}
-.hero-content{position:relative;z-index:2;width:min(1180px,calc(100% - 48px));margin:auto;padding:120px 0;color:#fff;max-width:720px}
-.hero-eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber-soft);margin:0 0 18px;font-weight:600}
-.hero h1{font-size:clamp(48px,8vw,104px);line-height:.95;letter-spacing:-.06em;margin:0 0 24px;font-weight:800}
+.hero{position:relative;min-height:92vh;display:flex;align-items:center;overflow:hidden;background:#13202b}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(rgba(19,32,43,.62),rgba(19,32,43,.85)),var(--hero-img) center/cover no-repeat;background-attachment:fixed;z-index:0}
+.hero-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at 75% 50%,transparent,rgba(19,32,43,.5));z-index:1}
+.hero-grid{position:relative;z-index:2;width:min(1180px,calc(100% - 48px));margin:auto;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding:110px 0;color:#fff;min-height:92vh}
+.hero-eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber-soft);margin:0 0 16px;font-weight:600}
+.hero h1{font-size:clamp(42px,5.5vw,76px);line-height:.95;letter-spacing:-.05em;margin:0 0 20px;font-weight:800}
 .hero h1 em{font-family:'Playfair Display',serif;font-style:italic;font-weight:600;color:var(--amber-soft)}
-.hero-sub{font-size:clamp(16px,2vw,20px);line-height:1.6;color:rgba(255,255,255,.85);max-width:540px;margin:0 0 36px}
-.hero-actions{display:flex;gap:16px;flex-wrap:wrap}
+.hero-sub{font-size:clamp(15px,1.6vw,18px);line-height:1.6;color:rgba(255,255,255,.82);max-width:480px;margin:0 0 32px}
+
+/* Glassmorphism enquiry form in hero */
+.hero-form{background:rgba(255,255,255,.08);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.18);border-radius:18px;padding:24px 26px 22px;box-shadow:0 16px 48px rgba(0,0,0,.25)}
+.hero-form-title{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--amber-soft);margin:0 0 16px}
+.hero-form-row{display:flex;gap:12px;margin-bottom:12px}
+.hero-form-row:last-of-type{margin-bottom:0}
+.hero-form input,.hero-form select{flex:1;padding:12px 14px;border:1px solid rgba(255,255,255,.15);border-radius:8px;font-size:14px;font-family:inherit;background:rgba(255,255,255,.06);color:#fff;transition:border-color .2s,background .2s}
+.hero-form input::placeholder{color:rgba(255,255,255,.5)}
+.hero-form input:focus,.hero-form select:focus{outline:none;border-color:var(--amber-soft);background:rgba(255,255,255,.1)}
+.hero-form select option{color:var(--ink);background:#fff}
+.hero-form .btn{padding:12px 18px;font-size:13px;white-space:nowrap;flex-shrink:0}
+.hero-form-note{font-size:11px;color:rgba(255,255,255,.45);margin:12px 0 0;text-align:center}
+
+/* Van animation scene */
+.hero-right{display:flex;flex-direction:column;align-items:center;gap:14px}
+.van-scene{width:100%;max-width:520px;filter:drop-shadow(0 20px 40px rgba(0,0,0,.4))}
+.van-svg{width:100%;height:auto;display:block}
+.hero-right-badge{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.7);font-weight:600;letter-spacing:.04em}
+.badge-pulse{width:8px;height:8px;background:#4ade80;border-radius:50%;box-shadow:0 0 0 0 rgba(74,222,128,.5);animation:badgePulse 2s infinite}
+@keyframes badgePulse{0%{box-shadow:0 0 0 0 rgba(74,222,128,.5)}70%{box-shadow:0 0 0 10px rgba(74,222,128,0)}100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}}
+
+/* SVG animation keyframes */
+.wheel-front,.wheel-rear{transform-box:fill-box;transform-origin:center}
+.wheel-front{animation:spin .6s linear infinite}
+.wheel-rear{animation:spin .6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.van-group{animation:vanBob 3s ease-in-out infinite}
+@keyframes vanBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+
+.road-dashes{animation:roadScroll .4s linear infinite}
+@keyframes roadScroll{to{transform:translateX(-80px)}}
+
+.trees{animation:treeScroll 8s linear infinite}
+@keyframes treeScroll{to{transform:translateX(-180px)}}
+
+.posts{animation:roadScroll .4s linear infinite}
+
+.mountain-far{animation:mountainFar 22s linear infinite}
+@keyframes mountainFar{to{transform:translateX(-120px)}}
+
+.mountain-near{animation:mountainNear 14s linear infinite}
+@keyframes mountainNear{to{transform:translateX(-180px)}}
+
+.dest-labels .dest-float-1{animation:floatLabel 4s ease-in-out infinite}
+.dest-labels .dest-float-2{animation:floatLabel 5s ease-in-out infinite .5s}
+.dest-labels .dest-float-3{animation:floatLabel 4.5s ease-in-out infinite 1s}
+@keyframes floatLabel{0%,100%{transform:translateY(0);opacity:.75}50%{transform:translateY(-8px);opacity:1}}
+
 .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:8px;font-size:14px;font-weight:700;transition:transform .25s,background .25s,box-shadow .25s;cursor:pointer;border:none;font-family:inherit}
 .btn-amber{background:var(--amber);color:#fff;box-shadow:0 8px 24px rgba(201,130,30,.35)}
 .btn-amber:hover{transform:translateY(-3px);background:#b0741a;box-shadow:0 12px 32px rgba(201,130,30,.45)}
 .btn-ghost{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(6px)}
 .btn-ghost:hover{background:rgba(255,255,255,.18);transform:translateY(-3px)}
-.hero-scroll{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:2;color:rgba(255,255,255,.6);font-size:11px;letter-spacing:.15em;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.hero-scroll{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:3;color:rgba(255,255,255,.5);font-size:11px;letter-spacing:.15em;text-transform:uppercase;display:flex;align-items:center;gap:10px}
 .hero-scroll span{display:inline-block;width:30px;height:1px;background:rgba(255,255,255,.4);animation:scrollPulse 2s infinite}
 @keyframes scrollPulse{0%,100%{opacity:.4;transform:scaleX(.6)}50%{opacity:1;transform:scaleX(1)}}
 
@@ -185,8 +234,13 @@ img{max-width:100%;display:block}
   .nav-links a{width:100%;padding:16px 24px;border-bottom:1px solid var(--line)}
   .nav-cta{margin:14px 24px;width:calc(100% - 48px);text-align:center}
   .hamburger{display:flex}
-  .hero{background-attachment:scroll}
-  .hero-content{padding:80px 0}
+  .hero{min-height:auto}
+  .hero-bg{background-attachment:scroll}
+  .hero-grid{grid-template-columns:1fr;gap:30px;padding:80px 0 90px;min-height:auto}
+  .hero-right{order:-1;margin-bottom:10px}
+  .van-scene{max-width:340px}
+  .hero-form-row{flex-direction:column}
+  .hero-form .btn{width:100%;justify-content:center}
   .quick-inner{gap:14px;flex-direction:column;align-items:flex-start}
   .quick-addr{margin-left:0}
   .service-grid,.dest-grid,.vehicle-grid,.review-grid{grid-template-columns:1fr}

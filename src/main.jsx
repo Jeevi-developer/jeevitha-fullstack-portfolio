@@ -70,9 +70,201 @@ function Reveal({ children, className = '' }) {
   return <div ref={ref} className={`reveal ${shown ? 'in' : ''} ${className}`}>{children}</div>;
 }
 
+function VanScene() {
+  return (
+    <div className="van-scene" aria-hidden="true">
+      <svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMax meet" className="van-svg">
+        {/* Sky gradient */}
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#2a4258" />
+            <stop offset="100%" stopColor="#3d5a75" />
+          </linearGradient>
+          <linearGradient id="roadG" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#2a3340" />
+            <stop offset="100%" stopColor="#1a2230" />
+          </linearGradient>
+          <linearGradient id="vanBody" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#f0f4f8" />
+            <stop offset="100%" stopColor="#c8d4e0" />
+          </linearGradient>
+          <clipPath id="vanClip">
+            <rect x="150" y="150" width="300" height="120" rx="14" />
+          </clipPath>
+        </defs>
+
+        {/* Sky */}
+        <rect width="600" height="260" fill="url(#sky)" />
+
+        {/* Sun glow */}
+        <circle cx="470" cy="90" r="36" fill="#e0a549" opacity="0.15" />
+        <circle cx="470" cy="90" r="22" fill="#e0a549" opacity="0.25" />
+
+        {/* Distant mountains - layer 1 (parallax slow) */}
+        <g className="mountain-far">
+          <path d="M0,260 L80,180 L160,220 L240,160 L320,210 L400,170 L480,200 L560,165 L600,195 L600,260 Z" fill="#33485c" opacity="0.6" />
+        </g>
+        {/* Distant mountains - layer 2 */}
+        <g className="mountain-near">
+          <path d="M0,260 L60,210 L140,240 L200,200 L280,235 L360,205 L440,230 L520,200 L600,225 L600,260 Z" fill="#2a3a4e" opacity="0.8" />
+        </g>
+
+        {/* Scrolling trees */}
+        <g className="trees">
+          <g className="tree-unit">
+            <rect x="20" y="222" width="6" height="20" fill="#1a2a1a" />
+            <circle cx="23" cy="215" r="16" fill="#2d4a2d" />
+          </g>
+          <g className="tree-unit" transform="translate(120,0)">
+            <rect x="20" y="222" width="6" height="20" fill="#1a2a1a" />
+            <circle cx="23" cy="215" r="14" fill="#264426" />
+          </g>
+          <g className="tree-unit" transform="translate(260,0)">
+            <rect x="20" y="222" width="6" height="20" fill="#1a2a1a" />
+            <circle cx="23" cy="215" r="18" fill="#2d4a2d" />
+          </g>
+          <g className="tree-unit" transform="translate(420,0)">
+            <rect x="20" y="222" width="6" height="20" fill="#1a2a1a" />
+            <circle cx="23" cy="215" r="15" fill="#264426" />
+          </g>
+          <g className="tree-unit" transform="translate(540,0)">
+            <rect x="20" y="222" width="6" height="20" fill="#1a2a1a" />
+            <circle cx="23" cy="215" r="17" fill="#2d4a2d" />
+          </g>
+        </g>
+
+        {/* Road */}
+        <rect x="0" y="260" width="600" height="140" fill="url(#roadG)" />
+        <line x1="0" y1="262" x2="600" y2="262" stroke="#4a5666" strokeWidth="2" />
+
+        {/* Road dashes - animated */}
+        <g className="road-dashes">
+          <rect x="0" y="328" width="40" height="4" rx="2" fill="#e0a549" opacity="0.7" />
+          <rect x="80" y="328" width="40" height="4" rx="2" fill="#e0a549" opacity="0.7" />
+          <rect x="160" y="328" width="40" height="4" rx="2" fill="#e0a549" opacity="0.7" />
+          <rect x="240" y="328" width="40" height="4" rx="2" fill="#e0a549" opacity="0.7" />
+          <rect x="320" y="328" width="40" height="4" rx="2" fill="#e0a549" opacity="0.7" />
+          <rect x="400" y="328" width="40" height="4" rx="2" fill="#e0a549" opacity="0.7" />
+          <rect x="480" y="328" width="40" height="4" rx="2" fill="#e0a549" opacity="0.7" />
+          <rect x="560" y="328" width="40" height="4" rx="2" fill="#e0a549" opacity="0.7" />
+        </g>
+
+        {/* Roadside posts */}
+        <g className="posts">
+          <rect x="50" y="270" width="4" height="20" fill="#4a5666" />
+          <rect x="250" y="270" width="4" height="20" fill="#4a5666" />
+          <rect x="450" y="270" width="4" height="20" fill="#4a5666" />
+        </g>
+
+        {/* --- Urbania van --- */}
+        <g className="van-group">
+          {/* Shadow */}
+          <ellipse cx="300" cy="295" rx="140" ry="8" fill="#000" opacity="0.3" />
+
+          {/* Body */}
+          <rect x="150" y="155" width="300" height="120" rx="14" fill="url(#vanBody)" />
+
+          {/* Roof accent */}
+          <rect x="160" y="152" width="280" height="6" rx="3" fill="#c9821e" />
+
+          {/* Windshield */}
+          <path d="M410,165 Q445,165 448,195 L448,205 L410,205 Z" fill="#4a6a8a" opacity="0.85" />
+          <path d="M410,165 Q445,165 448,195" fill="none" stroke="#6a8aaa" strokeWidth="1.5" opacity="0.5" />
+
+          {/* Side windows */}
+          <g clipPath="url(#vanClip)">
+            <rect x="165" y="168" width="55" height="42" rx="5" fill="#4a6a8a" opacity="0.8" />
+            <rect x="230" y="168" width="55" height="42" rx="5" fill="#4a6a8a" opacity="0.8" />
+            <rect x="295" y="168" width="55" height="42" rx="5" fill="#4a6a8a" opacity="0.8" />
+            <rect x="360" y="168" width="40" height="42" rx="5" fill="#4a6a8a" opacity="0.8" />
+            {/* Window reflections */}
+            <rect x="165" y="170" width="55" height="12" rx="5" fill="#7a9aba" opacity="0.3" />
+            <rect x="230" y="170" width="55" height="12" rx="5" fill="#7a9aba" opacity="0.3" />
+            <rect x="295" y="170" width="55" height="12" rx="5" fill="#7a9aba" opacity="0.3" />
+          </g>
+
+          {/* Lower body accent stripe */}
+          <rect x="150" y="238" width="300" height="5" fill="#c9821e" />
+          <rect x="150" y="246" width="300" height="2" fill="#a0681a" />
+
+          {/* Brand text */}
+          <text x="220" y="226" fontFamily="Manrope, sans-serif" fontSize="13" fontWeight="800" fill="#13202b" letterSpacing="0.5px">INFINITY</text>
+          <text x="220" y="240" fontFamily="Manrope, sans-serif" fontSize="8" fontWeight="600" fill="#6b7886" letterSpacing="1.5px">TRAVELLERS</text>
+
+          {/* Door line */}
+          <line x1="225" y1="160" x2="225" y2="275" stroke="#a0aabb" strokeWidth="1.5" opacity="0.5" />
+          <line x1="290" y1="160" x2="290" y2="275" stroke="#a0aabb" strokeWidth="1.5" opacity="0.5" />
+          <line x1="355" y1="160" x2="355" y2="275" stroke="#a0aabb" strokeWidth="1.5" opacity="0.5" />
+
+          {/* Headlight */}
+          <circle cx="445" cy="225" r="6" fill="#ffd97a" opacity="0.9" />
+          <circle cx="445" cy="225" r="3" fill="#fff8e0" />
+
+          {/* Taillight */}
+          <rect x="150" y="220" width="8" height="14" rx="2" fill="#c44030" opacity="0.8" />
+
+          {/* Bumper */}
+          <rect x="145" y="268" width="310" height="8" rx="3" fill="#5a6878" />
+
+          {/* --- Wheels --- */}
+          <g className="wheel-front">
+            <circle cx="400" cy="278" r="26" fill="#1a1a1a" />
+            <circle cx="400" cy="278" r="20" fill="#2a2a2a" />
+            <circle cx="400" cy="278" r="10" fill="#4a4a4a" />
+            <circle cx="400" cy="278" r="5" fill="#6a6a6a" />
+            {/* Spokes */}
+            <line x1="400" y1="262" x2="400" y2="294" stroke="#3a3a3a" strokeWidth="2" />
+            <line x1="384" y1="278" x2="416" y2="278" stroke="#3a3a3a" strokeWidth="2" />
+            <line x1="388" y1="266" x2="412" y2="290" stroke="#3a3a3a" strokeWidth="2" />
+            <line x1="388" y1="290" x2="412" y2="266" stroke="#3a3a3a" strokeWidth="2" />
+          </g>
+          <g className="wheel-rear">
+            <circle cx="200" cy="278" r="26" fill="#1a1a1a" />
+            <circle cx="200" cy="278" r="20" fill="#2a2a2a" />
+            <circle cx="200" cy="278" r="10" fill="#4a4a4a" />
+            <circle cx="200" cy="278" r="5" fill="#6a6a6a" />
+            <line x1="200" y1="262" x2="200" y2="294" stroke="#3a3a3a" strokeWidth="2" />
+            <line x1="184" y1="278" x2="216" y2="278" stroke="#3a3a3a" strokeWidth="2" />
+            <line x1="188" y1="266" x2="212" y2="290" stroke="#3a3a3a" strokeWidth="2" />
+            <line x1="188" y1="290" x2="212" y2="266" stroke="#3a3a3a" strokeWidth="2" />
+          </g>
+        </g>
+
+        {/* Floating destination labels */}
+        <g className="dest-labels">
+          <g className="dest-float-1">
+            <rect x="50" y="40" width="56" height="22" rx="11" fill="#13202b" opacity="0.75" />
+            <text x="78" y="55" textAnchor="middle" fontFamily="Manrope" fontSize="10" fontWeight="700" fill="#e0a549">Ooty</text>
+          </g>
+          <g className="dest-float-2">
+            <rect x="250" y="55" width="72" height="22" rx="11" fill="#13202b" opacity="0.75" />
+            <text x="286" y="70" textAnchor="middle" fontFamily="Manrope" fontSize="10" fontWeight="700" fill="#e0a549">Munnar</text>
+          </g>
+          <g className="dest-float-3">
+            <rect x="460" y="35" width="68" height="22" rx="11" fill="#13202b" opacity="0.75" />
+            <text x="494" y="50" textAnchor="middle" fontFamily="Manrope" fontSize="10" fontWeight="700" fill="#e0a549">Coorg</text>
+          </g>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
 function App() {
   const [navOpen, setNavOpen] = useState(false);
   const waLink = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent('Hi Infinity Travellers, I would like to plan a trip.')}`;
+
+  function handleEnquiry(e) {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    const name = fd.get('name') || '';
+    const phone = fd.get('phone') || '';
+    const dest = fd.get('destination') || '';
+    const dates = fd.get('dates') || '';
+    const travellers = fd.get('travellers') || '';
+    const msg = `Hi Infinity Travellers, I would like to plan a trip.%0a%0aName: ${encodeURIComponent(name)}%0aPhone: ${encodeURIComponent(phone)}%0aDestination: ${encodeURIComponent(dest)}%0aDates: ${encodeURIComponent(dates)}%0aTravellers: ${encodeURIComponent(travellers)}`;
+    window.open(`https://wa.me/${WHATSAPP}?text=${msg}`, '_blank');
+  }
 
   return (
     <StrictMode>
@@ -95,15 +287,42 @@ function App() {
           </div>
         </header>
 
-        <section className="hero" id="top" style={{ '--hero-img': `url(${heroImg})` }}>
+        <section className="hero" id="top">
+          <div className="hero-bg" style={{ '--hero-img': `url(${heroImg})` }} />
           <div className="hero-overlay" />
-          <div className="hero-content">
-            <p className="hero-eyebrow">Coimbatore • Tamil Nadu • South India</p>
-            <h1>Travel, <em>elevated.</em></h1>
-            <p className="hero-sub">Thoughtfully managed cab and tour services from Coimbatore — clean vehicles, courteous drivers and seamless support for every kilometre.</p>
-            <div className="hero-actions">
-              <a className="btn btn-amber" href="#destinations">Explore packages</a>
-              <a className="btn btn-ghost" href={waLink} target="_blank" rel="noreferrer">WhatsApp us</a>
+          <div className="hero-grid">
+            <div className="hero-left">
+              <p className="hero-eyebrow">Coimbatore • Tamil Nadu • South India</p>
+              <h1>Travel, <em>elevated.</em></h1>
+              <p className="hero-sub">Thoughtfully managed cab and tour services from Coimbatore — clean vehicles, courteous drivers and seamless support for every kilometre.</p>
+
+              <form className="hero-form" onSubmit={handleEnquiry}>
+                <p className="hero-form-title">Plan your journey</p>
+                <div className="hero-form-row">
+                  <input type="text" name="name" placeholder="Your name" required />
+                  <input type="tel" name="phone" placeholder="Phone number" required />
+                </div>
+                <div className="hero-form-row">
+                  <select name="destination" defaultValue="">
+                    <option value="" disabled>Destination</option>
+                    {destinations.map((d) => <option key={d.name} value={d.name}>{d.name}</option>)}
+                    <option value="custom">Custom / other</option>
+                  </select>
+                  <input type="text" name="dates" placeholder="Travel dates" />
+                </div>
+                <div className="hero-form-row">
+                  <input type="text" name="travellers" placeholder="No. of travellers" />
+                  <button type="submit" className="btn btn-amber">Get a quote ↗</button>
+                </div>
+                <p className="hero-form-note">Opens WhatsApp with your details pre-filled.</p>
+              </form>
+            </div>
+            <div className="hero-right">
+              <VanScene />
+              <div className="hero-right-badge">
+                <span className="badge-pulse" />
+                <span>Live fleet — Urbania class</span>
+              </div>
             </div>
           </div>
           <div className="hero-scroll">Scroll <span /></div>
