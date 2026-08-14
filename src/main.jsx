@@ -72,7 +72,7 @@ function App() {
         <a className="brand" href="#top" aria-label="Jeevitha home">
           <img
             className="brand-avatar"
-            src="/public/jeevitha-profile.png"
+            src="jeevitha-profile.png"
             alt="Jeevitha"
           />
           <strong>JR</strong>
@@ -116,7 +116,7 @@ function App() {
           <div className="orbit orbit-one" />
           <div className="orbit orbit-two" />
           <div className="hero-photo">
-            <img src="/public/jeevitha-profile.png" alt="Jeevitha" />
+            <img src="jeevitha-profile.png" alt="Jeevitha" />
           </div>
         </div>
         <div className="scroll-cue">
