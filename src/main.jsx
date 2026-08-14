@@ -64,7 +64,20 @@ function ArrowUpRight({ small = false }) {
   );
 }
 
-function App() {
+const testimonials = [
+  { text: 'Smooth and safe trip to Ooty. The driver was polite and knew all the best viewpoints. Highly recommended!', name: 'Arun Kumar', place: 'Coimbatore' },
+  { text: 'Booked a 3-day Munnar package for our family. Clean vehicle, comfortable stays and great pricing.', name: 'Priya Sundar', place: 'Chennai' },
+  { text: 'Very professional service. The team replied instantly on WhatsApp and arranged everything perfectly.', name: 'Faisal Rahman', place: 'Bangalore' },
+  { text: 'Affordable Coorg package with excellent coordination. Felt safe and well looked after throughout.', name: 'Latha Venkatesh', place: 'Coimbatore' },
+];
+
+function Icon({ name }) {
+  const paths = {
+    car: 'M5 11l1.5-4.5A2 2 0 0 1 8.4 5h7.2a2 2 0 0 1 1.9 1.5L19 11M5 11h14a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-1M5 11a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h1m12-7H7m12 7v-2a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2',
+    clock: 'M12 7v5l3 2m6-2a9 9 0 1 1-18 0 9 9 0 0 1 18 0',
+    map: 'M9 20l-5.45-2.73A1 1 0 0 1 3 16.38V5.36a1 1 0 0 1 1.45-.9L9 7m0 13l6-3m-6 3V7m6 10l5.55 2.78A1 1 0 0 0 22 18.9V7.72a1 1 0 0 0-.55-.9L15 4m0 13V4',
+    phone: 'M3 5a2 2 0 0 1 2-2h2.3a1 1 0 0 1 .95.68l1.1 3.3a1 1 0 0 1-.5 1.2l-1.7.9a12 12 0 0 0 5.5 5.5l.9-1.7a1 1 0 0 1 1.2-.5l3.3 1.1a1 1 0 0 1 .68.95V19a2 2 0 0 1-2 2A16 16 0 0 1 3 5z',
+  };
   return (
     <main>
       <div className="grain" aria-hidden="true" />
